@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.netflix.spectator.api.NoopRegistry
 import com.netflix.spectator.api.Registry
 import com.netflix.spinnaker.config.FiatSystemTest
-import com.netflix.spinnaker.config.TestUserRoleProviderConfig
 import com.netflix.spinnaker.fiat.config.FiatServerConfigurationProperties
 import com.netflix.spinnaker.fiat.model.Authorization
 import com.netflix.spinnaker.fiat.model.UserPermission
@@ -49,7 +48,7 @@ import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.http.HttpServletResponse
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
@@ -71,9 +70,6 @@ class AuthorizeControllerSpec extends Specification {
 
   @Autowired
   FiatServerConfigurationProperties fiatServerConfigurationProperties
-
-  @Autowired
-  TestUserRoleProviderConfig.TestUserRoleProvider userRoleProvider
 
   @Autowired
   Pool<Jedis> jedisPool
@@ -176,7 +172,7 @@ class AuthorizeControllerSpec extends Specification {
                                                 roleAroleBUser.view])
 
     then:
-    mockMvc.perform(get("/authorize/"))
+    mockMvc.perform(get("/authorize"))
            .andExpect(status().isOk())
            .andExpect(content().json(expected))
   }
