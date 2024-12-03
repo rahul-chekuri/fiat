@@ -40,6 +40,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -138,5 +139,10 @@ public class FiatConfig implements WebMvcConfigurer {
     scheduler.setPoolSize(poolSize);
 
     return scheduler;
+  }
+
+  @Override
+  public void configurePathMatch(PathMatchConfigurer configurer) {
+    configurer.setUseTrailingSlashMatch(true);
   }
 }
