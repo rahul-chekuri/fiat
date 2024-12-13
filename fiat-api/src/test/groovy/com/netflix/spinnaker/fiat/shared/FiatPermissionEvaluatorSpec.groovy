@@ -130,7 +130,7 @@ class FiatPermissionEvaluatorSpec extends FiatSharedSpecification {
         throw spinnakerHttpException
       }
     }
-
+    evaluator = updateEvaluator(fiatService)
     expect:
     evaluator.hasPermission(authentication, resource, 'APPLICATION', 'READ')
 
